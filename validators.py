@@ -1,8 +1,8 @@
 import logging
 import math
-
 from config import config
 from database import count_users, count_limits
+from gpt import count_gpt_tokens
 
 logging.basicConfig(
     level=config['LOGGING']['level'],
@@ -19,11 +19,6 @@ def check_users_in_db(user_id):
     if count > int(config['LIMITS']['MAX_USERS']):
         return None, "Превышено максимальное количество пользователей"
     return True, ""
-
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-def count_gpt_tokens(abv):
-    return 'abv'
 
 
 def is_gpt_token_limit(messages, total_spent_tokens):
