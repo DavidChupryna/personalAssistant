@@ -28,10 +28,8 @@ def is_gpt_token_limit(messages, total_spent_tokens):
     return all_tokens, ""
 
 
-def is_tts_symbol_limit(message):
-    user_id = message.from_user.id
-    text_symbols = len(message.text)
-
+def is_tts_symbol_limit(user_id, message):
+    text_symbols = len(message)
     all_symbols = count_limits(user_id, 'tts_symbols') + text_symbols
 
     if all_symbols >= int(config['LIMITS']['MAX_TTS_SYMBOLS']):
@@ -43,12 +41,10 @@ def is_tts_symbol_limit(message):
         msg = f"Превышен лимит SpeechKit TTS на запрос {config['LIMITS']['MAX_USER_TTS_SYMBOLS']}, в сообщении {text_symbols} символов"
         return False, msg
 
-    return len(message.text), 'Ваш запрос соответствует количеству символов'
+    return len(message), None
 
 
-def is_stt_block_limit(message, duration):
-    user_id = message.from_user.id
-
+def is_stt_block_limit(user_id, duration):
     audio_blocks = math.ceil(duration / 15)
     all_blocks = count_limits(user_id, 'stt_blocks') + audio_blocks
 

@@ -8,17 +8,18 @@ logging.basicConfig(
     filename=config['LOGGING']['filename'],
     filemode=config['LOGGING']['filemod']
 )
+iam_token = config['CREDENTIALS']['IAM_TOKEN']
+folder_id = config['CREDENTIALS']['FOLDER_ID']
 
 
 def count_gpt_tokens(messages):
-    url = "https://llm.api.cloud.yandex.net/foundationModels/v1/tokenizeCompletion"
+    url = config['GPT']['TOKENIZE_URL']
     headers = {
-        'Authorization': f'Bearer {config['CREDENTIALS']['IAM_TOKEN']}',
+        'Authorization': f'Bearer {iam_token}',
         'Content-Type': 'application/json'
     }
-    print(headers)
     data = {
-        'modelUri': f"gpt://{config['CREDENTIALS']['FOLDER_ID']}/yandexgpt-lite",
+        'modelUri': f"gpt://{folder_id}/yandexgpt-lite",
         "messages": messages
     }
     try:
@@ -29,13 +30,13 @@ def count_gpt_tokens(messages):
 
 
 def ask_gpt(messages):
-    url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
+    url = config['GPT']['URL']
     headers = {
-        'Authorization': f'Bearer {config['CREDENTIALS']['IAM_TOKEN']}',
+        'Authorization': f'Bearer {iam_token}',
         'Content-Type': 'application/json'
     }
     data = {
-        'modelUri': f"gpt://{config['CREDENTIALS']['FOLDER_ID']}/yandexgpt-lite",
+        'modelUri': f"gpt://{folder_id}/yandexgpt-lite",
         "completionOptions": {
             "stream": False,
             "temperature": 0.7,

@@ -25,8 +25,8 @@ config['LIMITS'] = {
     # 'MAX_SESSION': '3',
     # 'MAX_TOKEN_IN_SESSION': '1000',
     'MAX_USER_TTS_SYMBOLS': '2000',
-    'MAX_TTS_SYMBOLS': '10',
-    'MAX_USER_STT_BLOCKS': '1',
+    'MAX_TTS_SYMBOLS': '1000',
+    'MAX_USER_STT_BLOCKS': '7',
     'MAX_USER_GPT_TOKENS': '2000',
     'MAX_ANSWER_GPT_TOKENS': '64',
     'COUNT_LAST_MESSAGE': '4'
@@ -45,8 +45,8 @@ config['MAIN'] = {
 }
 
 config['CREDENTIALS'] = {
-    'FOLDER_ID': 'b1gmco3nm6e4ud4orfv9',
-    'IAM_TOKEN': 't1.9euelZrGj5CUkJCYl5vMkMjKkpONmu3rnpWay52RlYuSns_Hx8mZlYnNlZfl8_dMARZO-e82OGRd_t3z9wwwE0757zY4ZF3-zef1656Vms2QzMmZzcyVk5qQjMqNk8mP7_zF656Vms2QzMmZzcyVk5qQjMqNk8mPveuelZqezpqUyseMz4yRzpDOm5PIlLXehpzRnJCSj4qLmtGLmdKckJKPioua0pKai56bnoue0oye.dqeQz5bGy4S30vJxmtsAD_2gBcR7C3nf4t-sfxObPlF4NtBocXwGk4Ihpu5v_kMNet6OMij7CQON4mbjyCn1Dg',
+    'FOLDER_ID': "b1gmco3nm6e4ud4orfv9",
+    'IAM_TOKEN': "t1.9euelZqKipKemMuOmIyPyprGmo-Zxu3rnpWay52RlYuSns_Hx8mZlYnNlZfl8_cBPRBO-e8-X3p9_N3z90FrDU757z5fen38zef1656VmsvKzI2Nj8iOncqMyJ2czZ3P7_zF656VmsvKzI2Nj8iOncqMyJ2czZ3PveuelZqbzpyLzsuKmZ2TiY_PzcublrXehpzRnJCSj4qLmtGLmdKckJKPioua0pKai56bnoue0oye.MYmw6AcReBrRnFquWcp0Da_LWMHTTZlruX-51G3LQmmcL00JHgOYXxOJsYXcUP5BWhKrUo4stGgBgR6Z8RmvBw",
     'BOT_TOKEN': '7129389249:AAHmqsgt_KN0LmufD-J3H4fht66KpkKblpQ'
 }
 
