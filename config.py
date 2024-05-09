@@ -21,9 +21,7 @@ config['SPEECH_KIT'] = {
 
 config['LIMITS'] = {
     'MAX_MESSAGE_TOKENS': '50',
-    'MAX_USERS': '1',
-    # 'MAX_SESSION': '3',
-    # 'MAX_TOKEN_IN_SESSION': '1000',
+    'MAX_USERS': '2',
     'MAX_USER_TTS_SYMBOLS': '2000',
     'MAX_TTS_SYMBOLS': '1000',
     'MAX_USER_STT_BLOCKS': '7',
@@ -36,8 +34,6 @@ config['PROMPTS'] = {
     'SYSTEM': 'Ты веселый собеседник. Общайся с пользователем на "ты" и используй юмор. '
               'Поддерживай диалог. Не объясняй пользователю, что ты умеешь и можешь. '
               'Изображай человека',
-    # 'END': 'Напиши логическое завершение истории c неожиданной развязкой. Не добавляй пояснительный текст',
-    # 'CONTINUE': 'Логически продолжи сюжет в 1-3 предложения, держи интригу. Не добавляй пояснительный текст'
 }
 
 config['MAIN'] = {
@@ -46,7 +42,7 @@ config['MAIN'] = {
 
 config['CREDENTIALS'] = {
     'FOLDER_ID': "b1gmco3nm6e4ud4orfv9",
-    'IAM_TOKEN': "t1.9euelZqKipKemMuOmIyPyprGmo-Zxu3rnpWay52RlYuSns_Hx8mZlYnNlZfl8_cBPRBO-e8-X3p9_N3z90FrDU757z5fen38zef1656VmsvKzI2Nj8iOncqMyJ2czZ3P7_zF656VmsvKzI2Nj8iOncqMyJ2czZ3PveuelZqbzpyLzsuKmZ2TiY_PzcublrXehpzRnJCSj4qLmtGLmdKckJKPioua0pKai56bnoue0oye.MYmw6AcReBrRnFquWcp0Da_LWMHTTZlruX-51G3LQmmcL00JHgOYXxOJsYXcUP5BWhKrUo4stGgBgR6Z8RmvBw",
+    'IAM_TOKEN': "t1.9euelZqOy4maxsrKyYrOk5WRmsvIiu3rnpWay52RlYuSns_Hx8mZlYnNlZfl9PctBg1O-e9KTGS13fT3bTQKTvnvSkxktc3n9euelZrGk5jIl8_KjpSNjsmdzJaUyu_8xeuelZrGk5jIl8_KjpSNjsmdzJaUyr3rnpWamZaWmomTjs2Ry8zNm5mSzJa13oac0ZyQko-Ki5rRi5nSnJCSj4qLmtKSmouem56LntKMng.ktILq0spKQ1aKxMBtHuVEaUkKa7PgRPJKUFkccJw_QGEyUBk0YESORBupNPnvwn_AV-IFCTEhWhQmTddQT50AQ",
     'BOT_TOKEN': '7129389249:AAHmqsgt_KN0LmufD-J3H4fht66KpkKblpQ'
 }
 

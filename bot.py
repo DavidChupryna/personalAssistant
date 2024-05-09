@@ -12,13 +12,20 @@ bot = telebot.TeleBot(token=config['CREDENTIALS']['BOT_TOKEN'])
 
 @bot.message_handler(commands=['start'])
 def say_start(message):
-    bot.send_message(message.chat.id, '')
+    bot.send_message(message.chat.id, bot_templates['say_start'])
     create_database()
 
 
 @bot.message_handler(commands=['help'])
 def say_help(message):
-    bot.send_message(message.chat.id, 'хелп Кушик')#!!!!!!!!!!!!!!!!!!!!!
+    bot.send_message(message.chat.id, bot_templates['say_help'])
+
+
+@bot.message_handler(commands=['debug'])
+def send_logs(message):
+    with open("log_file.txt", "rb") as f:
+        bot.send_document(message.chat.id, f)
+        logging.info("Use command DEBUG")
 
 
 @bot.message_handler(commands=['tts'])
@@ -38,8 +45,10 @@ def text_to_speech(message):
     if message.text.isdigit():
         bot.send_message(message.chat.id, 'Введите текст, а не число!')
 
-    elif message.text == '/stop' or message.text == '/exit':#!!!!!!!!!!!!!!!!!!!!!!!!!
-        bot.send_message(message.chat.id, 'Функция остановлена')
+    elif message.text == '/stop':
+        bot.send_message(message.chat.id, bot_templates['function_stop'])
+        bot.send_message(message.chat.id, bot_templates['after_stop_function'])
+        logging.info('Function stop')
         return
 
     else:
@@ -55,8 +64,9 @@ def text_to_speech(message):
             if success:
                 with open("output.ogg", "wb") as audio_file:
                     audio_file.write(response)
-                bot.send_message(message.chat.id, 'Ваш текст обрабатывается, ожидайте...')
+                bot.send_message(message.chat.id, bot_templates['say_stay_tts'])
                 bot.send_audio(message.chat.id, audio=open('output.ogg', 'rb'))
+                bot.send_message(message.chat.id, bot_templates['say_stop'])
                 logging.info("The audio file was successfully saved as output.ogg")
             else:
                 logging.error("Error:", response)
@@ -78,8 +88,10 @@ def stt_handler(message):
 def speech_to_text(message):
     user_id = message.from_user.id
 
-    if message.text == '/stop' or message.text == '/exit':#!!!!!!!!!!!!!!!!!!!!!!!!!
-        bot.send_message(message.chat.id, 'Функция остановлена')
+    if message.text == '/stop':
+        bot.send_message(message.chat.id, bot_templates['function_stop'])
+        bot.send_message(message.chat.id, bot_templates['after_stop_function'])
+        logging.info('Function stop')
         return
 
     elif not message.voice:
@@ -99,10 +111,9 @@ def speech_to_text(message):
 
             if status:
                 add_message(user_id, [message.text, 'test_tts', 0, 0, blocks])
-                bot.send_message(message.chat.id, 'Ожидайте...')
+                bot.send_message(message.chat.id, bot_templates['say_stay_stt'])
                 bot.send_message(message.chat.id, text, reply_to_message_id=message.id)
-                bot.send_message(message.chat.id, 'Для выхода из функции speech to text, '
-                                                  'воспользуйтесь командой /stop или /exit')#!!!!!!
+                bot.send_message(message.chat.id, bot_templates['say_stop'])
                 logging.info("The audio file has been successfully processed into text.")
             else:
                 logging.error("Error:", text)
@@ -141,7 +152,9 @@ def handle_text(message):
         full_gpt_message = [answer_gpt, 'assistant', total_gpt_tokens, 0, 0]
         add_message(user_id=user_id, full_message=full_gpt_message)
 
+        bot.send_message(message.chat.id, bot_templates['say_stay_gpt'])
         bot.send_message(user_id, answer_gpt, reply_to_message_id=message.id)
+        bot.send_message(message.chat.id, bot_templates['say_after_answer'])
     except Exception as e:
         logging.error(e)
         bot.send_message(message.from_user.id, "Не получилось ответить. Попробуй написать другое сообщение")
@@ -196,7 +209,9 @@ def handle_voice(message: telebot.types.Message):
 
         status_tts, voice_response = tts(answer_gpt)
         if status_tts:
+            bot.send_message(message.chat.id, bot_templates['say_stay_gpt'])
             bot.send_voice(user_id, voice_response, reply_to_message_id=message.id)
+            bot.send_message(message.chat.id, bot_templates['say_after_answer'])
         else:
             bot.send_message(user_id, answer_gpt, reply_to_message_id=message.id)
 
@@ -204,12 +219,6 @@ def handle_voice(message: telebot.types.Message):
         logging.error(e)
         bot.send_message(message.chat.id, "Не получилось ответить. Попробуй записать другое сообщение")
 
-
-@bot.message_handler(commands=['debug'])
-def send_logs(message):
-    with open("log_file.txt", "rb") as f:
-        bot.send_document(message.chat.id, f)
-        logging.info("Use command DEBUG")
 
 
 bot.polling()

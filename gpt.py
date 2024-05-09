@@ -46,7 +46,7 @@ def ask_gpt(messages):
     }
     try:
         response = requests.post(url, headers=headers, json=data)
-
+        logging.info('GPT: request sent!')
         if response.status_code != 200:
             return False, f"Ошибка GPT. Статус-код: {response.status_code}", None
 

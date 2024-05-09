@@ -27,6 +27,7 @@ def tts(text):
         'folderId': folder_id,
     }
     response = requests.post(config['SPEECH_KIT']['TTS_URL'], headers=headers, data=data)
+    logging.info('TTS: text message sent')
 
     if response.status_code == 200:
         return True, response.content
@@ -50,6 +51,7 @@ def stt(data):
         headers=headers,
         data=data
     )
+    logging.info('STT: voice message sent')
 
     decoded_data = response.json()
     if decoded_data.get("error_code") is None:
