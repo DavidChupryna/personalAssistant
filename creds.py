@@ -3,14 +3,10 @@ import logging
 import time
 from datetime import datetime
 import requests
-from config import IAM_TOKEN_PATH, FOLDER_ID_PATH, BOT_TOKEN_PATH, config
+from config import LOGS, IAM_TOKEN_PATH, FOLDER_ID_PATH, BOT_TOKEN_PATH
 
-logging.basicConfig(
-    level=config['LOGGING']['level'],
-    format=config['LOGGING']['format'],
-    filename=config['LOGGING']['filename'],
-    filemode=config['LOGGING']['filemod']
-)
+logging.basicConfig(filename=LOGS, level=logging.INFO,
+                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 
 
 def create_new_token():

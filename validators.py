@@ -1,15 +1,11 @@
 import logging
 import math
-from config import config
+from config import config, LOGS
 from database import count_users, count_limits
 from gpt import count_gpt_tokens
 
-logging.basicConfig(
-    level=config['LOGGING']['level'],
-    format=config['LOGGING']['format'],
-    filename=config['LOGGING']['filename'],
-    filemode=config['LOGGING']['filemod']
-)
+logging.basicConfig(filename=LOGS, level=logging.INFO,
+                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 
 
 def check_users_in_db(user_id):

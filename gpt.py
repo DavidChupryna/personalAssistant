@@ -1,14 +1,10 @@
 import logging
 import requests
-from config import config, SYSTEM_PROMPT
+from config import config, SYSTEM_PROMPT, LOGS
 from creds import get_creds
 
-logging.basicConfig(
-    level=config['LOGGING']['level'],
-    format=config['LOGGING']['format'],
-    filename=config['LOGGING']['filename'],
-    filemode=config['LOGGING']['filemod']
-)
+logging.basicConfig(filename=LOGS, level=logging.INFO,
+                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 
 iam_token, folder_id = get_creds()
 

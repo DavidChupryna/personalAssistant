@@ -9,12 +9,6 @@ FOLDER_ID_PATH = f'{HOME_DIR}/creds/folder_id.txt'
 BOT_TOKEN_PATH = f'{HOME_DIR}/creds/bot_token.txt'
 
 config = configparser.ConfigParser()
-config['LOGGING'] = {
-    'level': 'INFO',
-    'format': '%%(asctime)s - %%(name)s - %%(levelname)s - %%(message)s',
-    'filename': 'logs.txt',
-    'filemod': 'w'
-}
 
 config['GPT'] = {
     'URL': 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion',

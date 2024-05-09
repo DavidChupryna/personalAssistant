@@ -1,6 +1,6 @@
 import logging
 import telebot
-from config import config
+from config import config, LOGS
 from database import create_database, add_message, select_n_last_messages
 from speechKit import tts, stt
 from validators import check_users_in_db, is_tts_symbol_limit, is_stt_block_limit, is_gpt_token_limit
@@ -9,6 +9,9 @@ from gpt import ask_gpt
 from creds import get_bot_token
 
 bot = telebot.TeleBot(get_bot_token())
+
+logging.basicConfig(filename=LOGS, level=logging.INFO,
+                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 
 
 @bot.message_handler(commands=['start'])
@@ -24,7 +27,7 @@ def say_help(message):
 
 @bot.message_handler(commands=['debug'])
 def send_logs(message):
-    with open("log_file.txt", "rb") as f:
+    with open("logs.txt", "rb") as f:
         bot.send_document(message.chat.id, f)
         logging.info("Use command DEBUG")
 

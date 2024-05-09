@@ -1,14 +1,9 @@
 import logging
 import sqlite3
+from config import config, LOGS
 
-from config import config
-
-logging.basicConfig(
-    level=config['LOGGING']['level'],
-    format=config['LOGGING']['format'],
-    filename=config['LOGGING']['filename'],
-    filemode=config['LOGGING']['filemod']
-)
+logging.basicConfig(filename=LOGS, level=logging.INFO,
+                    format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
 database = config['MAIN']['DB_FILE']
 
 
