@@ -1,7 +1,7 @@
 import logging
-
 import requests
 from config import config
+from creds import get_creds
 
 
 logging.basicConfig(
@@ -10,8 +10,8 @@ logging.basicConfig(
     filename=config['LOGGING']['filename'],
     filemode=config['LOGGING']['filemod']
 )
-iam_token = config['CREDENTIALS']['IAM_TOKEN']
-folder_id = config['CREDENTIALS']['FOLDER_ID']
+
+iam_token, folder_id = get_creds()
 
 
 def tts(text):

@@ -1,6 +1,7 @@
 import logging
 import requests
 from config import config, SYSTEM_PROMPT
+from creds import get_creds
 
 logging.basicConfig(
     level=config['LOGGING']['level'],
@@ -8,8 +9,8 @@ logging.basicConfig(
     filename=config['LOGGING']['filename'],
     filemode=config['LOGGING']['filemod']
 )
-iam_token = config['CREDENTIALS']['IAM_TOKEN']
-folder_id = config['CREDENTIALS']['FOLDER_ID']
+
+iam_token, folder_id = get_creds()
 
 
 def count_gpt_tokens(messages):
