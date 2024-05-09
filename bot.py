@@ -6,8 +6,9 @@ from speechKit import tts, stt
 from validators import check_users_in_db, is_tts_symbol_limit, is_stt_block_limit, is_gpt_token_limit
 from info import bot_templates
 from gpt import ask_gpt
+from creds import get_bot_token
 
-bot = telebot.TeleBot(token=config['CREDENTIALS']['BOT_TOKEN'])
+bot = telebot.TeleBot(get_bot_token())
 
 
 @bot.message_handler(commands=['start'])
