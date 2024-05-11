@@ -1,6 +1,6 @@
 import logging
 import telebot
-from config import config, LOGS
+from config import config, LOGS, AUDIO_FILE
 from database import create_database, add_message, select_n_last_messages
 from speechKit import tts, stt
 from validators import check_users_in_db, is_tts_symbol_limit, is_stt_block_limit, is_gpt_token_limit
@@ -27,7 +27,7 @@ def say_help(message):
 
 @bot.message_handler(commands=['debug'])
 def send_logs(message):
-    with open("logs.txt", "rb") as f:
+    with open(LOGS, "rb") as f:
         bot.send_document(message.chat.id, f)
         logging.info("Use command DEBUG")
 
@@ -66,7 +66,7 @@ def text_to_speech(message):
             success, response = tts(message.text)
 
             if success:
-                with open("output.ogg", "wb") as audio_file:
+                with open(AUDIO_FILE, "wb") as audio_file:
                     audio_file.write(response)
                 bot.send_message(message.chat.id, bot_templates['say_stay_tts'])
                 bot.send_audio(message.chat.id, audio=open('output.ogg', 'rb'))
