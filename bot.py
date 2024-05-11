@@ -69,7 +69,7 @@ def text_to_speech(message):
                 with open(AUDIO_FILE, "wb") as audio_file:
                     audio_file.write(response)
                 bot.send_message(message.chat.id, bot_templates['say_stay_tts'])
-                bot.send_audio(message.chat.id, audio=open('output.ogg', 'rb'))
+                bot.send_audio(message.chat.id, audio=open(AUDIO_FILE, 'rb'))
                 bot.send_message(message.chat.id, bot_templates['say_stop'])
                 logging.info("The audio file was successfully saved as output.ogg")
             else:
