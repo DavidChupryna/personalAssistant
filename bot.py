@@ -46,8 +46,8 @@ def tts_handler(message):
 def text_to_speech(message):
     user_id = message.from_user.id
 
-    if message.text.isdigit():
-        bot.send_message(message.chat.id, 'Введите текст, а не число!')
+    if type(message.text) != str:
+        bot.send_message(message.chat.id, bot_templates['if_not_text'])
 
     elif message.text == '/stop':
         bot.send_message(message.chat.id, bot_templates['function_stop'])
@@ -62,7 +62,7 @@ def text_to_speech(message):
             bot.send_message(message.chat.id, msg)
 
         else:
-            add_message(user_id, [message.text, 'test_tts', 0, symbols, 0])
+            add_message(user_id, [message.text, 'tts_test', 0, symbols, 0])
             success, response = tts(message.text)
 
             if success:
@@ -114,7 +114,7 @@ def speech_to_text(message):
             status, text = stt(file)
 
             if status:
-                add_message(user_id, [message.text, 'test_tts', 0, 0, blocks])
+                add_message(user_id, [text, 'stt_test', 0, 0, blocks])
                 bot.send_message(message.chat.id, bot_templates['say_stay_stt'])
                 bot.send_message(message.chat.id, text, reply_to_message_id=message.id)
                 bot.send_message(message.chat.id, bot_templates['say_stop'])
@@ -222,7 +222,6 @@ def handle_voice(message: telebot.types.Message):
     except Exception as e:
         logging.error(e)
         bot.send_message(message.chat.id, "Не получилось ответить. Попробуй записать другое сообщение")
-
 
 
 bot.polling()

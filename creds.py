@@ -46,7 +46,6 @@ def get_creds():
 
     with open(FOLDER_ID_PATH, 'r') as f:
         folder_id = f.read().strip()
-
     return iam_token, folder_id
 
 

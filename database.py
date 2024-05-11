@@ -1,10 +1,10 @@
 import logging
 import sqlite3
-from config import config, LOGS
+from config import LOGS, DB_FILE
 
 logging.basicConfig(filename=LOGS, level=logging.INFO,
                     format="%(asctime)s FILE: %(filename)s IN: %(funcName)s MESSAGE: %(message)s", filemode="w")
-database = config['MAIN']['DB_FILE']
+database = DB_FILE
 
 
 def create_database():
@@ -66,7 +66,7 @@ def select_n_last_messages(user_id, n_last_messages=4):
         con = sqlite3.connect(database)
         cursor = con.cursor()
         cursor.execute('''
-        SELECT message, role, total_gpt_tokens FROM messages WHERE user_id=? ORDER BY id DESC LIMIT ?''',
+        SELECT message, role, total_gpt_tokens FROM messages WHERE user_id=? AND (role='user' OR role='assistant') ORDER BY id DESC LIMIT ?''',
                        (user_id, n_last_messages))
         data = cursor.fetchall()
 

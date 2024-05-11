@@ -32,6 +32,7 @@ def ask_gpt(messages):
         'Authorization': f'Bearer {iam_token}',
         'Content-Type': 'application/json'
     }
+
     data = {
         'modelUri': f"gpt://{folder_id}/yandexgpt-lite",
         "completionOptions": {
@@ -41,8 +42,10 @@ def ask_gpt(messages):
         },
         "messages": SYSTEM_PROMPT + messages
     }
+
     try:
         response = requests.post(url, headers=headers, json=data)
+        print(response.json())
         logging.info('GPT: request sent!')
         if response.status_code != 200:
             return False, f"Ошибка GPT. Статус-код: {response.status_code}", None

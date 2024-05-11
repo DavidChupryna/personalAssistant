@@ -24,16 +24,12 @@ config['SPEECH_KIT'] = {
 config['LIMITS'] = {
     'MAX_MESSAGE_TOKENS': '50',
     'MAX_USERS': '2',
-    'MAX_USER_TTS_SYMBOLS': '100',
+    'MAX_USER_TTS_SYMBOLS': '200',
     'MAX_TTS_SYMBOLS': '2000',
     'MAX_USER_STT_BLOCKS': '15',
     'MAX_USER_GPT_TOKENS': '2000',
     'MAX_ANSWER_GPT_TOKENS': '64',
     'COUNT_LAST_MESSAGE': '4'
-}
-
-config['MAIN'] = {
-    'DB_FILE': 'messages.db'
 }
 
 SYSTEM_PROMPT = [{'role': 'system', 'text': 'Ты веселый собеседник. Общайся с пользователем на "ты" и используй юмор. '
