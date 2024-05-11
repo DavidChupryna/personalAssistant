@@ -28,13 +28,13 @@ def is_tts_symbol_limit(user_id, message):
     text_symbols = len(message)
     all_symbols = count_limits(user_id, 'tts_symbols') + text_symbols
 
-    if all_symbols >= int(config['LIMITS']['MAX_TTS_SYMBOLS']):
-        msg = (f"Превышен общий лимит SpeechKit TTS {config['LIMITS']['MAX_TTS_SYMBOLS']}. Использовано: "
-               f"{all_symbols} символов. Доступно: {int(config['LIMITS']['MAX_TTS_SYMBOLS']) - all_symbols}")
+    if all_symbols >= int(config['LIMITS']['MAX_USER_TTS_SYMBOLS']):
+        msg = (f"Превышен общий лимит SpeechKit TTS {config['LIMITS']['MAX_USER_TTS_SYMBOLS']}. Использовано: "
+               f"{all_symbols} символов. Доступно: {int(config['LIMITS']['MAX_USER_TTS_SYMBOLS']) - all_symbols}")
         return False, msg
 
-    if text_symbols >= int(config['LIMITS']['MAX_USER_TTS_SYMBOLS']):
-        msg = f"Превышен лимит SpeechKit TTS на запрос {config['LIMITS']['MAX_USER_TTS_SYMBOLS']}, в сообщении {text_symbols} символов"
+    if text_symbols >= int(config['LIMITS']['MAX_TTS_SYMBOLS']):
+        msg = f"Превышен лимит SpeechKit TTS на запрос {config['LIMITS']['MAX_TTS_SYMBOLS']}, в сообщении {text_symbols} символов"
         return False, msg
 
     return len(message), None

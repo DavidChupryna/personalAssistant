@@ -25,8 +25,8 @@ config['SPEECH_KIT'] = {
 config['LIMITS'] = {
     'MAX_MESSAGE_TOKENS': '50',
     'MAX_USERS': '2',
-    'MAX_USER_TTS_SYMBOLS': '200',
-    'MAX_TTS_SYMBOLS': '2000',
+    'MAX_USER_TTS_SYMBOLS': '4000',
+    'MAX_TTS_SYMBOLS': '500',
     'MAX_USER_STT_BLOCKS': '15',
     'MAX_USER_GPT_TOKENS': '2000',
     'MAX_ANSWER_GPT_TOKENS': '64',
